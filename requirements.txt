@@ -1,0 +1,12 @@
+Django>=1.4
+MySQL-python
+south
+django-staticfiles
+django-menu
+git+git://github.com/alex/django-fixture-generator.git
+git+git://github.com/jezdez/django-avatar.git
+git+git://github.com/burnash/gspread.git
+PIL
+django-google-charts
+django-qsstats-magic
+python-dateutil

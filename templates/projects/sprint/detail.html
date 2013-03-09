@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load menubuilder %}
+{% load i18n %}
+{% block header_content %}
+
+{% endblock %}
+
+{% block main_content %}
+
+    <h4>{{ sprint.title }}</h4>
+
+    <div class="badge">{{ sprint.description }}</div>
+
+    <a class="btn" href="{% url new_task_sprint project.id sprint.id %}">{% trans "New task" %}</a>
+    <table class="table">
+        <thead></thead>
+        <tbody>
+            {% for task in sprint.sprint_tasks.all %}
+
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.author.user }}</td>
+                    <td>{{ task.assigner.user }}</td>
+                    <td>{{ task.created_at }}</td>
+                    <td>{{ task.deadline_at }}</td>
+                </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block extended-left-menu %}
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            {% menu project-navigation %}
+            {% for item in menuitems %}
+                <li {% if item.current %}class='active'{% endif %}><a href="/{{ project.id }}{{ item.url }}" title="{{ item.title|escape }}"{% if item.current %} class='current'{% endif %}>{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div><!--/.well -->
+{% endblock %}

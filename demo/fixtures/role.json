@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "projects.role", "fields": {"name": "admin"}}, {"pk": 2, "model": "projects.role", "fields": {"name": "manager"}}, {"pk": 3, "model": "projects.role", "fields": {"name": "developer"}}]

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block header_content %}
+
+        {% load avatar_tags %}
+        {% avatar user 150 %}
+        {% load googlecharts %}
+        {# container #}
+        <div id="out" class="pull-right"></div>
+        {% googlecharts %}
+            {# named data and options can be reused #}
+            {% data values "out_data" %}
+                {% col "string" "Name" %}"{{ val }}"{% endcol %}
+                {% col "number" "Cubertin" %}{{ val }}{% endcol %}
+                {% col "number" "Test" %}{{ val }}{% endcol %}
+            {% enddata %}
+            {# you can also use global javascript variables here, #}
+            {# and call functions #}
+            {% options "out_options" %}
+                kind: "AreaChart",
+                options: {
+                width: 1100,
+                height: 150,
+                title: 'Personal effectivity',
+                hAxis: {title: 'Year',  titleTextStyle: {color: 'red'}}
+                }
+            {% endoptions %}
+            {# chart is assembled from container, data and options #}
+            {% graph "out" "out_data" "out_options" %}
+        {% endgooglecharts %}
+
+{% endblock %}
+
+{% block main_content %}
+
+    <div class="span4">
+        Тут будет инфа по проектам и задачам
+    </div>
+
+{% endblock %}

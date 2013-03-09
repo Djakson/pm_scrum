@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block header_content %}
+{% load menubuilder %}
+{% load i18n %}
+{% endblock %}
+
+{% block extended-left-menu %}
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            {% menu project-navigation %}
+            {% for item in menuitems %}
+                <li {% if item.current %}class='active'{% endif %}><a href="/{{ project.id }}{{ item.url }}" title="{{ item.title|escape }}"{% if item.current %} class='current'{% endif %}>{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div><!--/.well -->
+{% endblock %}
+
+{% block main_content %}
+    <table class="table table-bordered">
+
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>{% trans "Sprint name" %}</th>
+        <th>{% trans "Дата начала" %}</th>
+        <th>{% trans "Дата окончания" %}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sprint in sprint_list %}
+        <tr>
+            <td>{{ sprint.id }}</td>
+            <td><a href="{% url sprint_detail project.id sprint.id %}">{{ sprint.title }}</a></td>
+            <td>{{ sprint.created_at|date:"Y-m-d" }}</td>
+            <td>{{ sprint.deadline_at|date:"Y-m-d" }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}

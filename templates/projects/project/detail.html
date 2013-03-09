@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load menubuilder %}
+{% block header_content %}
+
+{% endblock %}
+{% block extended-left-menu %}
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            {% menu project-navigation %}
+            {% for item in menuitems %}
+                <li {% if item.current %}class='active'{% endif %}><a href="/{{ project.id }}{{ item.url }}" title="{{ item.title|escape }}"{% if item.current %} class='current'{% endif %}>{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div><!--/.well -->
+{% endblock %}
+
+{% block main_content %}
+
+    <div class="well well-small">
+        <span class="pull-left"><h4>{{ project.name|upper }}</h4></span><span class="pull-right">{{ project.created_at|date:"Y-m-d" }}<b> / </b>{{ project.deadline|date:"Y-m-d" }}</span>
+    </div>
+    <div class="well well-large">{{ project.description }}</div>
+
+    <div class="nav-tabs">
+        <a class="btn btn-inverse" href="{% url sprint_create project.id %}">{% trans "New sprint" %}</a>
+        <a href="{% url sprint_list project.id %}">{% trans "Sprints" %}</a>
+        <a href="{% url project_tasks project.id %}">{% trans "All tasks" %}</a>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block header_content %}
+
+{% endblock %}
+{% block main_content %}
+
+    <div class="nav-header">
+        <a class="btn btn-mini btn-inverse" href="{% url create_project %}">{% trans "create project" %}</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{% trans "Project name" %}</th>
+                <th>{% trans "Project owner" %}</th>
+                <th>{% trans "Start date" %}</th>
+                <th>{% trans "Deadline" %}</th>
+                <th class="hidden"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in project_list %}
+            <tr data-description="{{ project.description }}">
+                <td>{{ project.pk }}</td>
+                <td><a href="{% url project_detail project.pk %}">{{ project.name|striptags }}</a></td>
+                <td>{{ project.get_owner }}</td>
+                <td>{{ project.created_at|date:"Y-m-d"}}</td>
+                <td>{{ project.deadline|date:"Y-m-d"}}</td>
+                <td class="hidden"><span>{{ project.description }}</span></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+{% endblock %}

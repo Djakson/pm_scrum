@@ -1,0 +1,32 @@
+{% load i18n %}
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>{% trans "Task" %}</th>
+        <th>{% trans "Tracker" %}</th>
+        <th>{% trans "Status" %}</th>
+        <th>{% trans "Progress" %}</th>
+        <th>{% trans "Assigned to" %}</th>
+        <th>{% trans "Created at" %}</th>
+        <th>{% trans "Updated at" %}</th>
+        <th>{% trans "Deadline" %}</th>
+
+    </tr
+    </thead>
+    <tbody>
+    {% for task in sprint_task_list %}
+    <tr>
+        <td>{{ task.pk }}</td>
+        <td><a href="{% url sprint_task_detail project.id task.sprint.id task.id %}">{{ task.title }}</a></td>
+        <td>{% trans task.tracker.name %}</td>
+        <td>{% trans task.status.status %}</td>
+        <td>{{ task.progress }}</td>
+        <td>{{ task.assigner }}</td>
+        <td>{{ task.created_at|date:"Y-m-d" }} {{ task.created_at|time:"h:i" }}</td>
+        <td>{{ task.updated_at|date:"Y-m-d" }} {{ task.updated_at|time:"h:i" }}</td>
+        <td>{{ task.deadline_at|date:"Y-m-d" }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
